@@ -36,6 +36,21 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def destroy
+   @project = Project.find(params[:id])
+ #  @project.update(project_params)
+    
+    if @project.destroy
+      flash[:notice] = "Project has been destroyed."
+      redirect_to projects_path
+    else
+      flash[:alert] = "Project has not been destroyed."
+      
+      render "show"
+      # nothing, yet
+    end
+  end
+  
   def show
     @project = Project.find(params[:id])
   end
